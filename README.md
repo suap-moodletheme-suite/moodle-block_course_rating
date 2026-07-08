@@ -74,13 +74,3 @@ Para configurar o ambiente de build:
    ```bash
    npm run minify
    ```
-
----
-
-## 📂 Estrutura de Arquivos Principais
-
-* **[version.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/version.php):** Define a versão do plugin (necessário incrementar ao realizar atualizações).
-* **[edit_form.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/edit_form.php):** Formulário de edição de configuração da visibilidade do bloco.
-* **[block_course_rating.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/block_course_rating.php):** Lógica principal, processamento de formulário e renderização do bloco.
-* **[endpoint.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/endpoint.php):** Ponto de entrada AJAX para buscar e atualizar avaliações/comentários de forma assíncrona.
-* **[templates/](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/templates):** Contém os arquivos Mustache que definem o layout do bloco (`rating.mustache`, `rating_bars.mustache`, etc.).
