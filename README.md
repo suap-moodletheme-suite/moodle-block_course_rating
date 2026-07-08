@@ -1,61 +1,86 @@
-# Plugin Blocks - Course Rating
+# Moodle Block Plugin - Course Rating (Avaliação de Curso)
 
-Plugin de avaliação de curso em bloco
+Este é um plugin de bloco para o Moodle que permite aos estudantes avaliarem os cursos com notas de 1 a 5 estrelas e deixarem comentários textuais sobre a sua experiência.
 
-### Tabelas do plugin
+## 🚀 Requisitos e Instalação
 
-| Tabela de classificações | mdl_course_rating |               |
-|------------------------- | ----------------- | ------------  |
-| id        | Int          | Chave primária                    |
-| rating    | Int          | Nota da classificação             |
-| message   | Text         | Comentário da classificação       |
-| courseid  | Int          | ID do curso da classificação      |
-| createdat | datetime     | Data de Criação da classificação  |
-| updatedat | datetime     | Data de Edição da classificação   |
+* **Moodle:** Compatível com Moodle 3.11 ou superior.
+* **Instalação:** 
+  1. Baixe ou clone este repositório.
+  2. Extraia o conteúdo na pasta de blocos do seu Moodle: `<moodle_root>/blocks/course_rating`.
+  3. Acesse a administração do Moodle para executar a atualização do banco de dados.
 
-| Tabela de historico de classificações | course_rating_history       |           |
-|------ | ----------------- | --------- |
-| id        | Int | Chave primária      |
-| rating    | Int | Nota da classificação   |
-| message   | Text | Comentário da classificação    |
-| originid  | Int | ID da classificação original    |
-| createdat | datetime  | Data de Criação da classificação  |
+---
 
-### Configuração do plugin
+## 🗄️ Estrutura de Banco de Dados
 
-1. Configuração padrão: Exibir formulário para avaliar o curso apenas após ele ser marcado como concluído.
+O plugin cria e gerencia duas tabelas no banco de dados do Moodle. *Nota: Em execução, o Moodle adiciona o prefixo configurado (ex: `mdl_block_`).*
 
- ![](/pix/config-02.png)
+### Tabela de Classificações (`course_rating`)
+Armazena a nota e o comentário atual de cada usuário para cada curso.
 
-2. Configuração opcional: Exibir o formulário para avaliar o curso a qualquer momento.
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | Int | Chave primária auto-incremento |
+| `rating` | Int | Nota da classificação (1 a 5) |
+| `message` | Text | Comentário/feedback textual do estudante |
+| `userid` | Int | ID do usuário que realizou a avaliação |
+| `courseid` | Int | ID do curso avaliado |
+| `createdat` | Datetime | Data e hora de criação do registro |
+| `updatedat` | Datetime | Data e hora da última edição da avaliação |
 
- ![](/pix/config-01.png)
+### Tabela de Histórico (`course_rating_history`)
+Guarda o histórico de avaliações anteriores caso o usuário edite sua nota ou comentário.
 
- 
- ### Compilação de CSS e JS
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | Int | Chave primária auto-incremento |
+| `rating` | Int | Nota antiga da classificação |
+| `message` | Text | Comentário antigo |
+| `originid` | Int | ID da classificação correspondente na tabela principal (`course_rating`) |
+| `createdat` | Datetime | Data e hora em que a versão antiga foi arquivada |
 
-Dentro do diretório `amd/src` existe o package.json e gulp
+---
 
-1. instalar as dependencias do gulp:
+## ⚙️ Configuração do Bloco
 
-    `npm install`
+Ao adicionar o bloco à página do curso, você pode configurar o momento em que o formulário de avaliação ficará visível aos alunos:
 
-2. Rodar o script gulp
+1. **Após concluir o curso (Padrão):** O formulário de avaliação só é exibido se o estudante tiver preenchido os requisitos de conclusão do curso.
+   
+   ![](/pix/config-02.png)
 
-    `npm run minify`
+2. **Enquanto estiver cursando:** Permite que o estudante avalie o curso a qualquer momento da sua jornada.
+   
+   ![](/pix/config-01.png)
 
-### Principais arquivos:
+---
 
-1. **version.php**
-- Versão do aplicativo, incrementar ao realizar uma alteração para o moodle entender que houve uma mudança
+## 🛠️ Desenvolvimento (Compilação de CSS e JS)
 
-2. **edit_form.php**
-- Arquivo com a configuração do bloco, as duas opções atualmente são: "Após concluir o curso" e "Enquanto estiver cursando"
-Quando o bloco é adicionado essa configuração ficará vazia e por padrão o bloco utilizará o "Após concluir o curso"
+O código JavaScript e folhas de estilo estão localizados na pasta `amd/src` e utilizam o **Gulp** para otimização e minificação.
 
-3. **block_course_rating.php**
-- Arquivo com formulário e exibição do bloco de avaliação dentro do curso
+Para configurar o ambiente de build:
 
-4. **endpoint.php**
-- Arquivo para injetar HMTL na pagina inicial do curso com as avaliações totais e avaliações de usuários
+1. Entre no diretório de fontes AMD:
+   ```bash
+   cd amd/src
+   ```
+2. Instale as dependências de desenvolvimento:
+   ```bash
+   npm install
+   ```
+3. Execute o script de compilação/minificação:
+   ```bash
+   npm run minify
+   ```
 
+---
+
+## 📂 Estrutura de Arquivos Principais
+
+* **[version.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/version.php):** Define a versão do plugin (necessário incrementar ao realizar atualizações).
+* **[edit_form.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/edit_form.php):** Formulário de edição de configuração da visibilidade do bloco.
+* **[block_course_rating.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/block_course_rating.php):** Lógica principal, processamento de formulário e renderização do bloco.
+* **[endpoint.php](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/endpoint.php):** Ponto de entrada AJAX para buscar e atualizar avaliações/comentários de forma assíncrona.
+* **[templates/](file:///C:/Users/2080882/projetos/IFRN/suap-moodletheme-suite/block_course_rating/templates):** Contém os arquivos Mustache que definem o layout do bloco (`rating.mustache`, `rating_bars.mustache`, etc.).
