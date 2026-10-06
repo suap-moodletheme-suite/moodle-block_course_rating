@@ -21,13 +21,13 @@
 }}
 
 <!-- Users Total Rating -->
-<div class="row pl-3">
-    <div class="col-12 col-sm-3 col-lg-2 text-center text-sm-right">
+<div class="row ps-3">
+    <div class="col-12 col-sm-3 col-lg-2 text-center text-sm-end">
         <h1 class="rating_title">
             {{rating_total}}
         </h1>
     </div>
-    <div class="col-12 col-sm-9 col-lg-10 mr-n3 text-center text-sm-left">
+    <div class="col-12 col-sm-9 col-lg-10 me-n3 text-center text-sm-start">
         {{{rating_stars}}}
         <br/>
         <p class="pt-1 text_rating d-block">
@@ -37,11 +37,11 @@
 </div>
 
 <!-- Rating Percents -->
-<div class="row pl-3 mb-3">
-    <div class="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-3 pl-md-5 pl-sm-3 mr-n3">
+<div class="row ps-3 mb-3">
+    <div class="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-3 ps-md-5 ps-sm-3 me-n3">
         {{{stars_percents}}}
     </div>
-     <div class="col-6 col-sm-7 col-md-7 col-lg-8 col-xl-9 ml-sm-n5 ml-n5 d-none d-sm-block">
+     <div class="col-6 col-sm-7 col-md-7 col-lg-8 col-xl-9 ms-sm-n5 ms-n5 d-none d-sm-block">
       {{{stars_bars}}}
     </div>
 </div>
@@ -60,15 +60,15 @@
 
 {{#user_rating}}
 <!-- User Rating -->
-<div class="row pl-3 mb-4 mt-4" id="rating_message">
-    <div class="col-12 col-lg-2 text-center text-lg-right">
+<div class="row ps-3 mb-4 mt-4" id="rating_message">
+    <div class="col-12 col-lg-2 text-center text-lg-end">
         {{{user_img}}}
     </div>
-    <div class="col-lg-9 ml-n2">
-        <strong class="d-block user_rating_title text-center text-lg-left">
+    <div class="col-lg-9 ms-n2">
+        <strong class="d-block user_rating_title text-center text-lg-start">
             {{user_name}}
         </strong>
-        <span class="d-block text-center text-lg-left">
+        <span class="d-block text-center text-lg-start">
             {{{user_rating_stars}}}
         </span>
         <span class="user_rating_date">
@@ -102,16 +102,16 @@
 <form method="POST" id="rating_form">
     <input type="hidden" name="rating" id="rating" value="0">
 {{/user_rating}}
-    <div class="row pl-3">
-        <div class="col-md-2 text-center text-md-right col-form-label">
+    <div class="row ps-3">
+        <div class="col-md-2 text-center text-md-end col-form-label">
             <label for="user_rating_stars">{{user_rating_stars_label}}</label>
         </div>
-        <div class="col-md-9 col-form-label text-center text-md-left" id="user_rating_stars">
+        <div class="col-md-9 col-form-label text-center text-md-start" id="user_rating_stars">
             {{{stars_vote}}}
         </div>
     </div>
-    <div class="row pl-2">
-        <div class="col-md-2 text-center text-md-right col-form-label">
+    <div class="row ps-2">
+        <div class="col-md-2 text-center text-md-end col-form-label">
             <label for="user_rating_message">{{user_rating_message_label}}</label>
         </div>
         <div class="col-md-9 col-form-label">
